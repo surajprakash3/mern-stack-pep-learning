@@ -1,0 +1,45 @@
+.body{
+    background-color: blanchedalmond;
+    text-align: center;
+}
+.container{
+    background-color:rgb(227, 176, 176);
+    text-align: center;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid black;
+      padding: 8px;
+          border-radius: 50px;
+      
+
+
+}
+.h3{
+    background-color: aqua;
+    width: 150px;
+    text-align: center;
+    margin-left: 270px;
+    border-radius: 50px;
+}
+
+table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+                border-radius: 50px;
+        }
+        th, td {
+            border: 1px;
+            padding: 8px;
+            text-align: center;
+                border-radius: 50px;
+        }
+        th {
+            background-color: lightgray;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+                border-radius: 50px;
+        }

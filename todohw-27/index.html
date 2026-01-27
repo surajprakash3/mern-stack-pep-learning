@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Task Taker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="body">
+
+<h2 class="h2">Task Tacker</h2>
+
+<div class="container">
+    <label>Date</label>
+    <input type="date" id="date">
+
+    <label>Task</label>
+    <input type="text" id="task" placeholder="Your Task">
+
+    <label>Level</label>
+    <select id="choose">
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+    </select>
+
+    <button onclick="addtask()">ADD</button>
+</div>
+
+<h3 class="h3">Active Tasks</h3>
+<table >
+    <thead>
+        <tr class="tr">
+            <th>Date</th>
+            <th>Task</th>
+            <th>Level</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="atask">
+    
+    </tbody>
+</table>
+
+
+<h3 class="h3">Completed Tasks</h3>
+<table>
+    <thead>
+        <tr class="tr">
+            <th>Date</th>
+            <th>Task</th>
+            <th>Level</th>
+        </tr>
+    </thead>
+    <tbody id="adone">
+       
+    </tbody>
+</table>
+
+<script src="script.js"></script>
+</body>
+</div>
