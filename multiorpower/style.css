@@ -1,0 +1,63 @@
+.body{
+    background-color: gray;
+    border: 5px solid rgb(87, 76, 76);
+    border-radius: 50px;
+}
+.h2{
+    border-radius: 40px;
+    border: 5px solid rgb(80, 49, 49);
+
+    color: rgb(29, 24, 24);
+    background-color: rgb(121, 106, 106);
+    margin-left: 300px;
+    font-size: 60px;
+    width: 400px;
+    text-shadow: black;
+
+    text-align: center;
+}
+.container{
+    margin-top: 50px;
+    text-align:center;
+    margin-left: 300px;
+    height: 500px;
+    width: 400px;
+    background-color: rgb(173, 171, 171);
+    border-radius: 10px;
+    font-size: 30px;
+    text-shadow: black;
+    border: 5px solid rgb(41, 40, 40);
+    margin-bottom: 50px;
+
+
+}
+.v{
+    margin-top: 20px;
+    margin-bottom: 70px;
+    height: 50px;
+    text-size:60px;
+    text-shadow:black;
+  
+}
+#input{
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(246, 215, 215);
+}
+#square{
+     font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(246, 215, 215);
+    
+
+}
+#cube{
+ font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(246, 215, 215);
+}
+#forth{
+ font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(246, 215, 215);
+}
