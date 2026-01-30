@@ -38,7 +38,20 @@ function getUsers() {
   <body>
     <h1>user List(Dummyapi)</h1>
     <div id="status" class="loding">loding</div>
-    <div id="users"></div>
+    <!-- <div id="users"></div> -->
+
+    <table>
+    <thead>
+        <tr class="tr">
+            <th>id</th>
+            <th>Name</th>
+            <th>Phone no</th>
+        </tr>
+    </thead>
+    <tbody id="users">
+       
+    </tbody>
+</table>
     <script>
       const usersContainer=document.getElementById("users");
       const statusDiv=document.getElementById("status");
@@ -61,11 +74,11 @@ function getUsers() {
       function displayusers(users){
         console.log("users",users);
         users.forEach(user =>{
-            let card=document.createElement('div');
+            let card=document.createElement('tr');
           card.innerHTML=`
-          <h3>${user.id}</h3>
-          <p><strong>Name </strong>${user.name}</p>
-          <h4>${user.phone}</h4>
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.phone}</td>
           `;
           usersContainer.appendChild(card);
         });
@@ -75,3 +88,4 @@ function getUsers() {
 </html>
 
 
+ 

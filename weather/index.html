@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather & Location Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef3f7;
+      padding: 20px;
+      background-color: skyblue;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      background-color: rgb(224, 93, 45);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #0077ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005fd1;
+    }
+
+    #status {
+      text-align: center;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .weather {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .recent span {
+      display: inline-block;
+      background: #e1ecff;
+      padding: 6px 10px;
+      margin: 4px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .recent span:hover {
+      background: #cddfff;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>🌦 Weather & Location Dashboard</h2>
+
+  <input type="text" id="cityInput" placeholder="Enter city name (e.g. Gaya)" />
+  <button onclick="getWeather()">Search</button>
+
+  <div id="status"></div>
+  <div id="weather" class="weather"></div>
+
+  <div class="recent">
+    <h4>Recent Searches</h4>
+    <div id="recentCities"></div>
+  </div>
+</div>
+
+<script>
+
+
+
+  const API_KEY = "f1db6497c46989ee7d2ab5e6d0ef3bb2";
+
+
+  const statusDiv = document.getElementById("status");
+  const weatherDiv = document.getElementById("weather");
+  const recentDiv = document.getElementById("recentCities");
+
+  loadRecent();
+
+  function getWeather(cityFromClick) {
+    const city =
+      cityFromClick || document.getElementById("cityInput").value.trim();
+
+    if (!city) {
+      statusDiv.textContent = "❌ Please enter a city name";
+      return;
+    }
+
+    statusDiv.textContent = "⏳ Loading...";
+    weatherDiv.innerHTML = "";
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("API error");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        statusDiv.textContent = "";
+        showWeather(data);
+        saveRecent(city);
+      })
+      .catch(() => {
+        statusDiv.textContent = "⚠️ City not found or invalid API key";
+      });
+  }
+
+  function showWeather(data) {
+    weatherDiv.innerHTML = `
+      <h3>${data.name}, ${data.sys.country}</h3>
+      <p>🌡 Temperature: ${data.main.temp} °C</p>
+      <p>☁ Weather: ${data.weather[0].description}</p>
+      <p>💨 Wind Speed: ${data.wind.speed} m/s</p>
+    `;
+  }
+
+  function saveRecent(city) {
+    let cities = JSON.parse(localStorage.getItem("recentCities")) || [];
+
+    if (!cities.includes(city)) {
+      cities.unshift(city);
+      if (cities.length > 5) cities.pop();
+    }
+
+    localStorage.setItem("recentCities", JSON.stringify(cities));
+    loadRecent();
+  }
+
+  function loadRecent() {
+    recentDiv.innerHTML = "";
+    const cities = JSON.parse(localStorage.getItem("recentCities")) || [];
+
+    cities.forEach((city) => {
+      const span = document.createElement("span");
+      span.textContent = city;
+      span.onclick = () => getWeather(city);
+      recentDiv.appendChild(span);
+    });
+  }
+</script>
+
+</body>
+</html>

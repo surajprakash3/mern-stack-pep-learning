@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Data</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .table-container {
+        width: 70%;
+        margin: auto;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: lightgray;
+      }
+
+      #status {
+        margin: 10px 0;
+        color: blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 style="text-align: center">User Data</h1>
+
+    <div class="table-container">
+      <input type="text" id="search" placeholder="Type name to search..." />
+
+      <div id="status">Loading...</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone No</th>
+          </tr>
+        </thead>
+        <tbody id="users"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const usersContainer = document.getElementById("users");
+      const statusDiv = document.getElementById("status");
+      const searchInput = document.getElementById("search");
+
+      let allUsers = [];
+
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((res) => res.json())
+        .then((users) => {
+          statusDiv.style.display = "none";
+          allUsers = users;
+          displayUsers(allUsers);
+        });
+
+      function displayUsers(users) {
+        usersContainer.innerHTML = "";
+
+        users.forEach((user) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+        <td>${user.id}</td>
+        <td>${user.name}</td>
+        <td>${user.phone}</td>
+      `;
+          usersContainer.appendChild(row);
+        });
+      }
+
+      searchInput.addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+
+        const filtered = allUsers.filter((user) =>
+          user.name.toLowerCase().includes(value),
+        );
+
+        displayUsers(filtered);
+      });
+    </script>
+  </body>
+</html>

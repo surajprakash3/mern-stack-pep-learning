@@ -1,7 +1,7 @@
-// initial balance
+
 let currentBalance = 5000;
 
-// show initial balance in input (optional)
+
 document.getElementById("balance").value = currentBalance;
 
 function adddeposit() {
